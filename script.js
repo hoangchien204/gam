@@ -1,42 +1,38 @@
-<<<<<<< HEAD
-// script.js
-function openLoginForm() {
-    document.getElementById("loginForm").style.display = "block";
-  }
-  
-  function closeLoginForm() {
-    document.getElementById("loginForm").style.display = "none";
-  }
-//   document.getElementById('category').addEventListener('click', function() {
-//     var submenu = document.getElementById('category-menu');
-//     submenu.classList.toggle('active');
-// });
+import React, { useState } from 'react';
+import { Element } from 'react-scroll';
 
-// // Tương tự, bạn có thể làm cho phần thương hiệu
-// document.getElementById('brand').addEventListener('click', function() {
-//     var submenu = document.getElementById('brand-menu');
-//     submenu.classList.toggle('active');
-// });
+const App = () => {
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
-=======
-// script.js
-function openLoginForm() {
-    document.getElementById("loginForm").style.display = "block";
-  }
-  
-  function closeLoginForm() {
-    document.getElementById("loginForm").style.display = "none";
-  }
-//   document.getElementById('category').addEventListener('click', function() {
-//     var submenu = document.getElementById('category-menu');
-//     submenu.classList.toggle('active');
-// });
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    setIsHeaderVisible(scrollPosition < 100); // Thay 100 bằng ngưỡng bạn muốn
+  };
 
-// // Tương tự, bạn có thể làm cho phần thương hiệu
-// document.getElementById('brand').addEventListener('click', function() {
-//     var submenu = document.getElementById('brand-menu');
-//     submenu.classList.toggle('active');
-// });
+  // Thêm event listener khi component được mount
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
->>>>>>> 591938ea69e6be76e777350db9b59d5138cced87
-  
+  return (
+    <div>
+      {isHeaderVisible ? (
+        <header>
+          {/* Nội dung của header */}
+        </header>
+      ) : (
+        <nav>
+          {/* Nội dung của navbar */}
+        </nav>
+      )}
+      <Element name="scroll-to-element">
+        {/* Nội dung của trang */}
+      </Element>
+    </div>
+  );
+};
+
+export default App;
